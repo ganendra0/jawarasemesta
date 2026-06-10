@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Barang extends Model
+class Berita extends Model
 {
     protected $fillable = [
-        'nama_barang',
-        'stok',
-        'harga'
+        'judul',
+        'isi',
+        'penulis',
+        'tanggal_publikasi'
     ];
 }
