@@ -6,6 +6,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
 
 class BeritaForm
 {
@@ -18,6 +19,10 @@ class BeritaForm
                 Textarea::make('isi')
                     ->required()
                     ->columnSpanFull(),
+                FileUpload::make('gambar')
+                    ->image()
+                    ->directory('berita')
+                    ->nullable(),
                 TextInput::make('penulis')
                     ->required(),
                 DatePicker::make('tanggal_publikasi')

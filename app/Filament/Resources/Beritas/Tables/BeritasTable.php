@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
 
 class BeritasTable
 {
@@ -18,6 +19,9 @@ class BeritasTable
                     ->searchable(),
                 TextColumn::make('penulis')
                     ->searchable(),
+                ImageColumn::make('gambar')
+                    ->square()
+                    ->size(100),
                 TextColumn::make('tanggal_publikasi')
                     ->date()
                     ->sortable(),
