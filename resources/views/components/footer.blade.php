@@ -3,47 +3,54 @@
     $services = ['Website Development', 'Mobile App Development', 'IT Consulting', 'Cloud Solutions'];
 @endphp
 
-<footer class="bg-slate-950 text-white">
-    <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
-        <div>
-            <div class="flex items-center gap-3">
-                <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-sm font-bold text-blue-900">JS</span>
-                <span class="text-lg font-semibold">Jawara Semesta</span>
+<footer class="bg-slate-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
+            <div class="lg:col-span-1">
+                <a href="#home" class="flex items-center gap-2" aria-label="Jawara Semesta home">
+                    <span class="flex h-8 w-8 items-center justify-center rounded bg-white text-xs font-bold text-slate-900">JS</span>
+                    <span class="text-lg font-semibold tracking-tight text-white">Jawara Semesta</span>
+                </a>
+                <p class="mt-6 text-sm leading-relaxed text-slate-400">Smart digital solutions for modern businesses through robust software, cloud, and IT consulting services.</p>
+                <div class="mt-8 flex gap-4">
+                    @foreach (['in' => 'LinkedIn', 'ig' => 'Instagram', 'x' => 'X'] as $icon => $label)
+                        <a href="#contact" class="flex h-8 w-8 items-center justify-center rounded bg-slate-800 text-xs font-medium text-slate-300 transition hover:bg-slate-700 hover:text-white" aria-label="{{ $label }}">
+                            {{ $icon }}
+                        </a>
+                    @endforeach
+                </div>
             </div>
-            <p class="mt-5 text-sm leading-7 text-slate-300">Smart digital solutions for modern businesses through software, cloud, and IT consulting services.</p>
+
+            <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-3 lg:pl-16">
+                <div>
+                    <h3 class="text-sm font-semibold text-white">Quick Links</h3>
+                    <ul role="list" class="mt-6 space-y-4">
+                        @foreach ($quickLinks as $label => $href)
+                            <li><a href="{{ $href }}" class="text-sm text-slate-400 transition hover:text-white">{{ $label }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white">Services</h3>
+                    <ul role="list" class="mt-6 space-y-4">
+                        @foreach ($services as $service)
+                            <li><a href="#services" class="text-sm text-slate-400 transition hover:text-white">{{ $service }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <h3 class="text-sm font-semibold text-white">Contact</h3>
+                    <ul role="list" class="mt-6 space-y-4">
+                        <li class="text-sm text-slate-400">hello@jawarasemesta.id</li>
+                        <li class="text-sm text-slate-400">+62 812 3456 7890</li>
+                        <li class="text-sm text-slate-400">Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-400">Quick Links</h2>
-            <div class="mt-5 grid gap-3">
-                @foreach ($quickLinks as $label => $href)
-                    <a href="{{ $href }}" class="text-sm text-slate-300 transition hover:text-white">{{ $label }}</a>
-                @endforeach
-            </div>
+        <div class="mt-16 border-t border-slate-800 pt-8 sm:mt-20">
+            <p class="text-sm text-slate-400">© {{ date('Y') }} Jawara Semesta. All rights reserved.</p>
         </div>
-
-        <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-400">Services</h2>
-            <div class="mt-5 grid gap-3">
-                @foreach ($services as $service)
-                    <a href="#services" class="text-sm text-slate-300 transition hover:text-white">{{ $service }}</a>
-                @endforeach
-            </div>
-        </div>
-
-        <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-400">Social Media</h2>
-            <div class="mt-5 flex gap-3">
-                @foreach (['in' => 'LinkedIn', 'ig' => 'Instagram', 'x' => 'X'] as $icon => $label)
-                    <a href="#contact" class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 text-xs font-bold text-slate-300 transition hover:border-white hover:text-white" aria-label="{{ $label }}">
-                        {{ $icon }}
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    <div class="border-t border-slate-800 px-5 py-6">
-        <p class="mx-auto max-w-7xl text-sm text-slate-400">© {{ date('Y') }} Jawara Semesta. All rights reserved.</p>
     </div>
 </footer>

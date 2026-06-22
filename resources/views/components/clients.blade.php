@@ -1,27 +1,24 @@
 @props(['clients'])
 
-<section id="clients" class="bg-slate-50 py-20">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
+<section id="clients" class="bg-white py-24 border-t border-slate-100">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center">
-            <p class="text-sm font-semibold uppercase tracking-wide text-blue-700">Our Clients</p>
-            <h2 class="mt-4 text-3xl font-bold tracking-normal text-slate-950 sm:text-4xl">Trusted by teams building better digital operations.</h2>
+            <h2 class="text-lg font-medium text-slate-900">Trusted by teams building better digital operations.</h2>
         </div>
 
-        <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div class="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-4">
             @forelse ($clients as $client)
-                <a href="{{ $client->website ?: '#clients' }}" class="flex min-h-36 flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                <a href="{{ $client->website ?: '#clients' }}" class="group flex items-center justify-center">
                     @if ($client->logo)
-                        <img src="{{ asset('storage/'.$client->logo) }}" alt="{{ $client->name }}" class="max-h-14 w-auto object-contain">
+                        <img src="{{ asset('storage/'.$client->logo) }}" alt="{{ $client->name }}" class="max-h-12 w-auto object-contain opacity-50 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0">
                     @else
-                        <span class="flex h-14 w-14 items-center justify-center rounded-lg bg-blue-50 text-lg font-bold text-blue-900">{{ \Illuminate\Support\Str::of($client->name)->substr(0, 2)->upper() }}</span>
+                        <span class="flex h-12 items-center justify-center text-lg font-bold text-slate-400 transition duration-300 group-hover:text-slate-900">{{ \Illuminate\Support\Str::of($client->name)->substr(0, 2)->upper() }}</span>
                     @endif
-                    <span class="mt-4 text-sm font-semibold text-slate-700">{{ $client->name }}</span>
                 </a>
             @empty
                 @foreach (['Aruna Group', 'Nusantara Digital', 'Prima Retail', 'Sagara Finance'] as $client)
-                    <div class="flex min-h-36 flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-                        <span class="flex h-14 w-14 items-center justify-center rounded-lg bg-blue-50 text-lg font-bold text-blue-900">{{ \Illuminate\Support\Str::of($client)->substr(0, 2)->upper() }}</span>
-                        <span class="mt-4 text-sm font-semibold text-slate-700">{{ $client }}</span>
+                    <div class="flex items-center justify-center">
+                        <span class="text-xl font-bold text-slate-300">{{ $client }}</span>
                     </div>
                 @endforeach
             @endforelse

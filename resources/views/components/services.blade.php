@@ -9,24 +9,24 @@
     ];
 @endphp
 
-<section id="services" class="bg-white py-20">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="max-w-3xl">
-            <p class="text-sm font-semibold uppercase tracking-wide text-blue-700">Services</p>
-            <h2 class="mt-4 text-3xl font-bold tracking-normal text-slate-950 sm:text-4xl">Technology services for every stage of digital growth.</h2>
+<section id="services" class="bg-white py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-2xl">
+            <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Services</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Technology services for every stage of digital growth.</h2>
         </div>
 
-        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($services as $service)
-                <article class="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-900/10">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-50 text-blue-800">
-                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="{{ $service['icon'] }}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <div class="group relative">
+                    <div class="flex h-10 w-10 items-center justify-center rounded bg-slate-50 text-slate-900 ring-1 ring-slate-200/50">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="{{ $service['icon'] }}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <h3 class="mt-6 text-lg font-semibold text-slate-950">{{ $service['title'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">{{ $service['description'] }}</p>
-                </article>
+                    <h3 class="mt-6 text-base font-semibold text-slate-900">{{ $service['title'] }}</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">{{ $service['description'] }}</p>
+                </div>
             @endforeach
         </div>
     </div>
