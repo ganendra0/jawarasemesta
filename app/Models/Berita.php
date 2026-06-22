@@ -11,6 +11,13 @@ class Berita extends Model
         'isi',
         'gambar',
         'penulis',
-        'tanggal_publikasi'
+        'tanggal_publikasi',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'tanggal_publikasi' => 'date',
+        ];
+    }
 }
