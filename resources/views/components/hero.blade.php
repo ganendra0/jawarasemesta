@@ -1,8 +1,5 @@
 <section id="home" class="relative overflow-hidden bg-white pt-32 pb-20 lg:pt-40 lg:pb-28">
     <div class="mx-auto max-w-5xl px-6 text-center lg:px-8">
-        <p class="mb-6 inline-block rounded bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-700">
-            IT Consultant for Digital Growth
-        </p>
         <h1 class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Smart Digital Solutions for <br class="hidden sm:block" />Modern Businesses
         </h1>

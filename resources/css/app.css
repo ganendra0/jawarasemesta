@@ -5,8 +5,19 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Inter', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-headline: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-sans: 'Inter', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-primary: #114B98;
+    --color-secondary: #3A72D3;
+    --color-tertiary: #E63946;
+    --color-neutral: #F5F7FA;
+    --color-deep-navy: #0A2D5C;
+    --color-ink-black: #1A1A1A;
+    --color-slate-gray: #404040;
+
+    --shadow-ambient: 0 8px 30px rgba(17, 75, 152, 0.12);
 }
 
 html {

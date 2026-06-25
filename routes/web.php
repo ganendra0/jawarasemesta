@@ -6,21 +6,37 @@ use App\Models\Portofolio;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
-Route::get('/', function () {
-    $getRecords = fn (string $table, string $model, ?string $latestColumn = null, int $limit = 3) => rescue(function () use ($table, $model, $latestColumn, $limit) {
-        if (! Schema::hasTable($table)) {
-            return collect();
-        }
+$getRecords = fn (string $table, string $model, ?string $latestColumn = null, ?int $limit = null) => rescue(function () use ($table, $model, $latestColumn, $limit) {
+    if (! Schema::hasTable($table)) {
+        return collect();
+    }
 
-        $query = $latestColumn ? $model::latest($latestColumn) : $model::latest();
+    $query = $latestColumn ? $model::latest($latestColumn) : $model::latest();
 
+    if ($limit) {
         return $query->take($limit)->get();
-    }, collect(), report: false);
+    }
+    
+    return $query->get();
+}, collect(), report: false);
 
+Route::get('/', function () use ($getRecords) {
     return view('home', [
-        'portfolios' => $getRecords('portofolios', Portofolio::class),
-        'clients' => $getRecords('clients', Client::class, limit: 8),
-        'articles' => $getRecords('beritas', Berita::class, 'tanggal_publikasi'),
+        'portfolios' => $getRecords('portofolios', Portofolio::class, null, 3),
+        'clients' => $getRecords('clients', Client::class, null, 8),
+        'articles' => $getRecords('beritas', Berita::class, 'tanggal_publikasi', 3),
+    ]);
+});
+
+Route::get('/portofolio', function () use ($getRecords) {
+    return view('portofolio', [
+        'portfolios' => $getRecords('portofolios', Portofolio::class)
+    ]);
+});
+
+Route::get('/berita', function () use ($getRecords) {
+    return view('berita', [
+        'articles' => $getRecords('beritas', Berita::class, 'tanggal_publikasi')
     ]);
 });
 
