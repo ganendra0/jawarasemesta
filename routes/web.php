@@ -22,7 +22,12 @@ $getRecords = fn (string $table, string $model, ?string $latestColumn = null, ?i
 
 Route::get('/', function () use ($getRecords) {
     return view('home', [
-        'portfolios' => $getRecords('portofolios', Portofolio::class, null, 3),
+        'portfolios' => rescue(function () {
+            if (!Schema::hasTable('portofolios')) {
+                return collect();
+            }
+            return Portofolio::with('clients')->latest()->take(3)->get();
+        }, collect(), report: false),
         'clients' => $getRecords('clients', Client::class, null, 8),
         'articles' => $getRecords('beritas', Berita::class, 'tanggal_publikasi', 3),
     ]);
@@ -30,7 +35,12 @@ Route::get('/', function () use ($getRecords) {
 
 Route::get('/portofolio', function () use ($getRecords) {
     return view('portofolio', [
-        'portfolios' => $getRecords('portofolios', Portofolio::class)
+        'portfolios' => rescue(function () {
+            if (!Schema::hasTable('portofolios')) {
+                return collect();
+            }
+            return Portofolio::with('clients')->latest()->get();
+        }, collect(), report: false)
     ]);
 });
 

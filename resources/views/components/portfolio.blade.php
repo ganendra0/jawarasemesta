@@ -25,6 +25,20 @@
                         @endif
                     </div>
                     <div class="mt-6">
+                        @if ($portfolio->clients->isNotEmpty())
+                            <div class="mb-3">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    @foreach ($portfolio->clients as $client)
+                                        <div class="flex items-center gap-1.5 rounded bg-slate-100 px-2.5 py-1 border border-slate-200">
+                                            @if ($client->logo)
+                                                <img src="{{ asset('storage/'.$client->logo) }}" alt="{{ $client->name }}" class="h-4 w-auto object-contain">
+                                            @endif
+                                            <span class="text-xs font-medium text-slate-600">{{ $client->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                         <h3 class="text-xl font-semibold text-slate-900">{{ $portfolio->judul }}</h3>
                         <p class="mt-2 text-sm leading-relaxed text-slate-600">{{ \Illuminate\Support\Str::limit($portfolio->deskripsi, 130) }}</p>
                         @if ($portfolio->teknologi)
@@ -34,6 +48,18 @@
                                 @endforeach
                             </div>
                         @endif
+                        <div class="mt-4 flex gap-4">
+                            @if ($portfolio->link_demo)
+                                <a href="{{ $portfolio->link_demo }}" target="_blank" class="text-sm font-medium text-slate-900 hover:text-slate-600">
+                                    View Demo →
+                                </a>
+                            @endif
+                            @if ($portfolio->link_github)
+                                <a href="{{ $portfolio->link_github }}" target="_blank" class="text-sm font-medium text-slate-600 hover:text-slate-900">
+                                    GitHub →
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </article>
             @empty

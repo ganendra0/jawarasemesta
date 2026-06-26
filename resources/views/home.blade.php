@@ -222,6 +222,23 @@
                         @endif
                     </div>
                     <div class="p-8">
+                        {{-- Client Information --}}
+                        @if ($portfolio->clients->isNotEmpty())
+                            <div class="mb-4">
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($portfolio->clients as $client)
+                                        <div class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
+                                            @if ($client->logo)
+                                                <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" class="h-4 w-auto object-contain">
+                                            @endif
+                                            <span class="text-xs font-medium text-slate-600">{{ $client->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                        {{-- End Client Information --}}
+                        
                         @if ($portfolio->teknologi)
                             <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-[12px] font-semibold mb-4">{{ explode(',', $portfolio->teknologi)[0] }}</span>
                         @endif

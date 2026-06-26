@@ -16,8 +16,17 @@ class ClientForm
                     ->label('Client Name')
                     ->required(),
                 FileUpload::make('logo')
+                    ->disk('public')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
                     ->directory('clients')
+                    ->imagePreviewHeight('200')
+                    ->loadingIndicatorPosition('left')
+                    ->panelAspectRatio('1:1')
+                    ->panelLayout('integrated')
+                    ->removeUploadedFileButtonPosition('right')
+                    ->uploadButtonPosition('left')
+                    ->uploadProgressIndicatorPosition('left')
                     ->nullable(),
                 TextInput::make('website')
                     ->url()

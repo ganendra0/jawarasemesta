@@ -16,6 +16,7 @@ class ClientsTable
         return $table
             ->columns([
                 ImageColumn::make('logo')
+                    ->disk('public')
                     ->square()
                     ->size(72),
                 TextColumn::make('name')

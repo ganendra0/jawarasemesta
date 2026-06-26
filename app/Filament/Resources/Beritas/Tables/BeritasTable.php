@@ -20,6 +20,7 @@ class BeritasTable
                 TextColumn::make('penulis')
                     ->searchable(),
                 ImageColumn::make('gambar')
+                    ->disk('public')
                     ->square()
                     ->size(100),
                 TextColumn::make('tanggal_publikasi')

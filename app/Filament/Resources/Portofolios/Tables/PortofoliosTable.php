@@ -18,8 +18,14 @@ class PortofoliosTable
                 TextColumn::make('judul')
                     ->searchable(),
                 ImageColumn::make('gambar')
+                    ->disk('public')
                     ->square()
                     ->size(100),
+                TextColumn::make('clients.name')
+                    ->label('Clients')
+                    ->badge()
+                    ->searchable()
+                    ->placeholder('No clients'),
                 TextColumn::make('link_demo')
                     ->searchable(),
                 TextColumn::make('link_github')

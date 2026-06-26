@@ -20,8 +20,17 @@ class BeritaForm
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('gambar')
+                    ->disk('public')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
                     ->directory('berita')
+                    ->imagePreviewHeight('250')
+                    ->loadingIndicatorPosition('left')
+                    ->panelAspectRatio('2:1')
+                    ->panelLayout('integrated')
+                    ->removeUploadedFileButtonPosition('right')
+                    ->uploadButtonPosition('left')
+                    ->uploadProgressIndicatorPosition('left')
                     ->nullable(),
                 TextInput::make('penulis')
                     ->required(),
