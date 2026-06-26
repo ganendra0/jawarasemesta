@@ -22,11 +22,28 @@
                         @endif
                     </div>
                     <div class="p-8">
+                        {{-- Client Information --}}
+                        @if ($portfolio->clients->isNotEmpty())
+                            <div class="mb-4">
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($portfolio->clients as $client)
+                                        <div class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
+                                            @if ($client->logo)
+                                                <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" class="h-4 w-auto object-contain">
+                                            @endif
+                                            <span class="text-xs font-medium text-slate-600">{{ $client->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                        {{-- End Client Information --}}
+
                         @if ($portfolio->teknologi)
                             <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-[12px] font-semibold mb-4">{{ explode(',', $portfolio->teknologi)[0] }}</span>
                         @endif
                         <h3 class="font-headline text-[24px] font-semibold text-ink-black mb-2">{{ $portfolio->judul }}</h3>
-                        <button onclick="openPortfolioModal({{ json_encode(['judul' => $portfolio->judul, 'deskripsi' => $portfolio->deskripsi, 'gambar' => $portfolio->gambar ? Storage::url($portfolio->gambar) : null, 'link_demo' => $portfolio->link_demo, 'link_github' => $portfolio->link_github, 'teknologi' => $portfolio->teknologi]) }})" class="text-[14px] font-semibold text-slate-gray group-hover:text-primary flex items-center gap-1 mt-4 transition-colors">
+                        <button onclick="openPortfolioModal({{ json_encode(['judul' => $portfolio->judul, 'deskripsi' => $portfolio->deskripsi, 'gambar' => $portfolio->gambar ? Storage::url($portfolio->gambar) : null, 'link_demo' => $portfolio->link_demo, 'link_github' => $portfolio->link_github, 'teknologi' => $portfolio->teknologi, 'clients' => $portfolio->clients->map(fn($c) => ['name' => $c->name, 'logo' => $c->logo ? Storage::url($c->logo) : null])]) }})" class="text-[14px] font-semibold text-slate-gray group-hover:text-primary flex items-center gap-1 mt-4 transition-colors">
                             Lihat detail <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                     </div>

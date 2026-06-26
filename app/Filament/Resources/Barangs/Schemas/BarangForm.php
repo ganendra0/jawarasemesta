@@ -68,6 +68,7 @@ class BarangForm
                     ->label('Harga')
                     ->numeric()
                     ->prefix('Rp')
+                    ->default(0)
                     ->step(0.01)
                     ->minValue(0),
             ]);

@@ -20,7 +20,16 @@ class Barang extends Model
         return [
             'images' => 'array',
             'harga' => 'decimal:2',
+            'stok' => 'integer',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(function (Barang $barang) {
+            $barang->harga = $barang->harga ?? 0;
+            $barang->stok = $barang->stok ?? 0;
+        });
     }
 
     public function getFirstImageUrlAttribute()

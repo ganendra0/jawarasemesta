@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Barang;
 use App\Models\Berita;
 use App\Models\Client;
 use App\Models\Portofolio;
@@ -47,6 +48,17 @@ Route::get('/portofolio', function () use ($getRecords) {
 Route::get('/berita', function () use ($getRecords) {
     return view('berita', [
         'articles' => $getRecords('beritas', Berita::class, 'tanggal_publikasi')
+    ]);
+});
+
+Route::get('/produk', function () {
+    return view('produk', [
+        'products' => rescue(function () {
+            if (!Schema::hasTable('barangs')) {
+                return collect();
+            }
+            return Barang::latest()->get();
+        }, collect(), report: false)
     ]);
 });
 

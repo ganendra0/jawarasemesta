@@ -67,6 +67,7 @@
                     <a href="{{ url('/#services') }}" class="text-slate-gray hover:text-primary font-medium transition-colors">Services</a>
                     <a href="{{ url('/#portfolio') }}" class="text-slate-gray hover:text-primary font-medium transition-colors">Portfolio</a>
                     <a href="{{ url('/#insights') }}" class="text-slate-gray hover:text-primary font-medium transition-colors">Insights</a>
+                    <a href="{{ url('/produk') }}" class="text-slate-gray hover:text-primary font-medium transition-colors">Produk</a>
                 </div>
 
                 <!-- CTA Button -->
@@ -125,6 +126,7 @@
                         <li><a href="{{ url('/#about') }}" class="hover:text-white transition-colors">About Us</a></li>
                         <li><a href="{{ url('/#services') }}" class="hover:text-white transition-colors">Services</a></li>
                         <li><a href="{{ url('/portofolio') }}" class="hover:text-white transition-colors">Portfolio</a></li>
+                        <li><a href="{{ url('/produk') }}" class="hover:text-white transition-colors">Produk</a></li>
                         <li><a href="{{ url('/berita') }}" class="hover:text-white transition-colors">Insights/Blog</a></li>
                     </ul>
                 </div>
@@ -133,18 +135,18 @@
                 <div>
                     <h4 class="font-headline text-[18px] font-bold mb-6 text-white">Get in Touch</h4>
                     <ul class="space-y-4 text-[16px] text-neutral/70">
-                        <li class="flex items-start gap-3">
+                        <a href="https://maps.app.goo.gl/XmhNT3RqwUjy4rsR8"><li class="flex items-start gap-3">
                             <svg class="w-5 h-5 text-secondary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span>Surabaya, Jawa Timur, Indonesia</span>
-                        </li>
+                            <span>Jl. Tenggilis Lama IV B No.50, Tenggilis Mejoyo, Kec. Tenggilis Mejoyo, Surabaya, Jawa Timur 60292</span>
+                        </li></a>
                         <li class="flex items-center gap-3">
                             <svg class="w-5 h-5 text-secondary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <span>info@jawarasemesta.com</span>
+                            <span>kurniawan@jawarasemesta.com</span>
                         </li>
-                        <li class="flex items-center gap-3">
+                        <a href="https://wa.me/6281234590339"><li class="flex items-center gap-3">
                             <svg class="w-5 h-5 text-secondary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            <span>+62 811 2345 6789</span>
-                        </li>
+                            <span>+62 812 3459 0339</span>
+                        </li></a>
                     </ul>
                 </div>
             </div>
@@ -179,6 +181,7 @@
                     <div id="modalImgPlaceholder" class="w-full h-full flex items-center justify-center text-slate-gray font-medium">No Image</div>
                 </div>
                 <div class="w-full md:w-1/2 p-8">
+                    <div id="modalClients" class="flex flex-wrap gap-2 mb-4"></div>
                     <div id="modalTech" class="flex flex-wrap gap-2 mb-4"></div>
                     <h3 id="modalTitle" class="font-headline text-[28px] font-bold text-ink-black mb-4 leading-[1.2]"></h3>
                     <p id="modalDesc" class="text-slate-gray text-[16px] leading-[1.6] mb-8"></p>
@@ -217,6 +220,23 @@
             // Set texts
             document.getElementById('modalTitle').textContent = data.judul;
             document.getElementById('modalDesc').textContent = data.deskripsi || 'Tidak ada deskripsi.';
+
+            // Set clients
+            const clientContainer = document.getElementById('modalClients');
+            clientContainer.innerHTML = '';
+            if (data.clients && data.clients.length > 0) {
+                data.clients.forEach(client => {
+                    const div = document.createElement('div');
+                    div.className = 'flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200';
+                    let inner = '';
+                    if (client.logo) {
+                        inner += '<img src="' + client.logo + '" alt="' + client.name + '" class="h-4 w-auto object-contain">';
+                    }
+                    inner += '<span class="text-xs font-medium text-slate-600">' + client.name + '</span>';
+                    div.innerHTML = inner;
+                    clientContainer.appendChild(div);
+                });
+            }
 
             // Set technologies
             const techContainer = document.getElementById('modalTech');
@@ -312,6 +332,88 @@
 
         function closeArticleModal() {
             const modal = document.getElementById('articleModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+    </script>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-deep-navy/80 backdrop-blur-sm" onclick="closeProductModal()"></div>
+        <div class="relative bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl animate-[fadeIn_0.3s_ease-out]">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-neutral p-2 rounded-full text-slate-gray hover:text-tertiary hover:bg-tertiary/10 transition-colors z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/2 bg-neutral min-h-[300px] relative">
+                    <img id="productModalImg" src="" alt="Product Image" class="w-full h-full object-cover hidden">
+                    <div id="productModalImgPlaceholder" class="w-full h-full flex items-center justify-center text-slate-gray font-medium">No Image</div>
+                    <div id="productModalThumbs" class="flex gap-2 p-3 overflow-x-auto bg-white/80 backdrop-blur"></div>
+                </div>
+                <div class="w-full md:w-1/2 p-8">
+                    <h3 id="productModalTitle" class="font-headline text-[28px] font-bold text-ink-black mb-4 leading-[1.2]"></h3>
+                    <div id="productModalDesc" class="text-slate-gray text-[16px] leading-[1.8] max-w-none [&>p]:mb-4 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-4 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:mb-4 [&>h1]:text-ink-black [&>h2]:text-xl [&>h2]:font-bold [&>h2]:mb-3 [&>h2]:text-ink-black [&>h3]:text-lg [&>h3]:font-bold [&>h3]:mb-3 [&>h3]:text-ink-black [&>a]:text-primary [&>a]:underline [&>strong]:text-ink-black"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let productImages = [];
+
+        function openProductModal(data) {
+            const modal = document.getElementById('productModal');
+            const img = document.getElementById('productModalImg');
+            const placeholder = document.getElementById('productModalImgPlaceholder');
+            const thumbsContainer = document.getElementById('productModalThumbs');
+
+            productImages = data.images || [];
+
+            document.getElementById('productModalTitle').textContent = data.nama;
+            document.getElementById('productModalDesc').innerHTML = data.deskripsi || 'Tidak ada deskripsi.';
+
+            thumbsContainer.innerHTML = '';
+
+            if (productImages.length > 0) {
+                img.src = productImages[0];
+                img.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+
+                if (productImages.length > 1) {
+                    productImages.forEach((src, i) => {
+                        const thumb = document.createElement('button');
+                        thumb.className = 'flex-shrink-0 w-14 h-14 rounded overflow-hidden border-2 transition-colors' + (i === 0 ? ' border-primary' : ' border-transparent');
+                        thumb.innerHTML = '<img src="' + src + '" class="w-full h-full object-cover">';
+                        thumb.onclick = function() { swapProductImage(i); };
+                        thumbsContainer.appendChild(thumb);
+                    });
+                    thumbsContainer.classList.remove('hidden');
+                } else {
+                    thumbsContainer.classList.add('hidden');
+                }
+            } else {
+                img.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+                thumbsContainer.classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function swapProductImage(index) {
+            const img = document.getElementById('productModalImg');
+            img.src = productImages[index];
+            const thumbs = document.querySelectorAll('#productModalThumbs button');
+            thumbs.forEach((t, i) => {
+                t.className = 'flex-shrink-0 w-14 h-14 rounded overflow-hidden border-2 transition-colors' + (i === index ? ' border-primary' : ' border-transparent');
+            });
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             document.body.style.overflow = '';
