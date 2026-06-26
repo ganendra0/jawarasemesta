@@ -176,21 +176,21 @@
                 <p class="text-[14px] font-semibold text-slate-gray uppercase tracking-[0.05em]">DIPERCAYA OLEH INSTANSI & PERUSAHAAN</p>
             </div>
             
-            <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-12 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-12">
                 @forelse ($clients as $client)
-                    <div class="bg-white px-6 py-3 rounded border border-[#E1E8F0] shadow-sm flex items-center justify-center min-w-[120px]">
+                    <div class="bg-white px-8 py-4 rounded border border-[#E1E8F0] shadow-sm flex items-center justify-center min-w-[140px] transition-all duration-300 hover:scale-110 hover:shadow-ambient">
                         @if ($client->logo)
-                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" class="max-h-8 w-auto object-contain">
+                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" class="max-h-14 w-auto object-contain">
                         @else
-                            <span class="font-bold text-slate-gray">{{ $client->name }}</span>
+                            <span class="font-bold text-slate-gray text-[16px]">{{ $client->name }}</span>
                         @endif
                     </div>
                 @empty
-                    <div class="bg-white px-6 py-3 rounded border border-[#E1E8F0] shadow-sm flex items-center justify-center min-w-[120px]">
-                        <span class="font-bold text-slate-gray">Aruna Group</span>
+                    <div class="bg-white px-8 py-4 rounded border border-[#E1E8F0] shadow-sm flex items-center justify-center min-w-[140px] transition-all duration-300 hover:scale-110 hover:shadow-ambient">
+                        <span class="font-bold text-slate-gray text-[16px]">Aruna Group</span>
                     </div>
-                    <div class="bg-white px-6 py-3 rounded border border-[#E1E8F0] shadow-sm flex items-center justify-center min-w-[120px]">
-                        <span class="font-bold text-slate-gray">Nusantara Digital</span>
+                    <div class="bg-white px-8 py-4 rounded border border-[#E1E8F0] shadow-sm flex items-center justify-center min-w-[140px] transition-all duration-300 hover:scale-110 hover:shadow-ambient">
+                        <span class="font-bold text-slate-gray text-[16px]">Nusantara Digital</span>
                     </div>
                 @endforelse
             </div>
@@ -213,7 +213,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 @forelse ($portfolios as $portfolio)
-                <div class="group cursor-pointer bg-white rounded border border-[#E1E8F0] hover:border-transparent hover:shadow-ambient transition-all duration-300 overflow-hidden transform hover:-translate-y-1">
+                <div class="group cursor-pointer bg-white rounded border border-[#E1E8F0] hover:border-transparent hover:shadow-ambient transition-all duration-300 overflow-hidden transform hover:-translate-y-1" onclick="openPortfolioModal({{ json_encode(['judul' => $portfolio->judul, 'deskripsi' => $portfolio->deskripsi, 'gambar' => $portfolio->gambar ? Storage::url($portfolio->gambar) : null, 'link_demo' => $portfolio->link_demo, 'link_github' => $portfolio->link_github, 'teknologi' => $portfolio->teknologi, 'clients' => $portfolio->clients->map(fn($c) => ['name' => $c->name, 'logo' => $c->logo ? Storage::url($c->logo) : null])]) }})">
                     <div class="overflow-hidden bg-deep-navy h-56 relative">
                         @if ($portfolio->gambar)
                             <img src="{{ Storage::url($portfolio->gambar) }}" alt="{{ $portfolio->judul }}" class="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500" />
@@ -243,9 +243,9 @@
                             <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-[12px] font-semibold mb-4">{{ explode(',', $portfolio->teknologi)[0] }}</span>
                         @endif
                         <h3 class="font-headline text-[24px] font-semibold text-ink-black mb-2">{{ $portfolio->judul }}</h3>
-                        <button onclick="openPortfolioModal({{ json_encode(['judul' => $portfolio->judul, 'deskripsi' => $portfolio->deskripsi, 'gambar' => $portfolio->gambar ? Storage::url($portfolio->gambar) : null, 'link_demo' => $portfolio->link_demo, 'link_github' => $portfolio->link_github, 'teknologi' => $portfolio->teknologi, 'clients' => $portfolio->clients->map(fn($c) => ['name' => $c->name, 'logo' => $c->logo ? Storage::url($c->logo) : null])]) }})" class="text-[14px] font-semibold text-slate-gray group-hover:text-primary flex items-center gap-1 mt-4 transition-colors">
+                        <span class="text-[14px] font-semibold text-slate-gray group-hover:text-primary flex items-center gap-1 mt-4 transition-colors">
                             Lihat detail <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
+                        </span>
                     </div>
                 </div>
                 @empty
@@ -273,7 +273,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 @forelse ($articles as $article)
-                <article class="bg-neutral rounded border border-[#E1E8F0] overflow-hidden transition-all duration-300 hover:border-transparent hover:shadow-ambient transform hover:-translate-y-1">
+                <article class="group cursor-pointer bg-neutral rounded border border-[#E1E8F0] overflow-hidden transition-all duration-300 hover:border-transparent hover:shadow-ambient transform hover:-translate-y-1" onclick="openArticleModal({{ json_encode(['judul' => $article->judul, 'isi' => $article->isi, 'gambar' => $article->gambar ? Storage::url($article->gambar) : null, 'tanggal' => optional($article->tanggal_publikasi)->format('M d, Y') ?? 'Artikel']) }})">
                     <div class="h-48 relative overflow-hidden bg-white">
                         @if ($article->gambar)
                             <img src="{{ Storage::url($article->gambar) }}" alt="{{ $article->judul }}" class="w-full h-full object-cover" />
@@ -285,13 +285,13 @@
                         </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="font-headline text-[24px] font-semibold text-ink-black mb-3 hover:text-primary cursor-pointer" onclick="openArticleModal({{ json_encode(['judul' => $article->judul, 'isi' => $article->isi, 'gambar' => $article->gambar ? Storage::url($article->gambar) : null, 'tanggal' => optional($article->tanggal_publikasi)->format('M d, Y') ?? 'Artikel']) }})">
+                        <h3 class="font-headline text-[24px] font-semibold text-ink-black mb-3 group-hover:text-primary transition-colors">
                             {{ $article->judul }}
                         </h3>
                         <p class="text-slate-gray text-[16px] mb-6 line-clamp-3 leading-[1.6]">
                             {{ \Illuminate\Support\Str::limit(strip_tags($article->isi), 120) }}
                         </p>
-                        <button onclick="openArticleModal({{ json_encode(['judul' => $article->judul, 'isi' => $article->isi, 'gambar' => $article->gambar ? Storage::url($article->gambar) : null, 'tanggal' => optional($article->tanggal_publikasi)->format('M d, Y') ?? 'Artikel']) }})" class="text-primary text-[14px] font-semibold hover:text-secondary flex items-center gap-1">Baca Selengkapnya &rarr;</button>
+                        <span class="text-primary text-[14px] font-semibold group-hover:text-secondary flex items-center gap-1 transition-colors">Baca Selengkapnya &rarr;</span>
                     </div>
                 </article>
                 @empty

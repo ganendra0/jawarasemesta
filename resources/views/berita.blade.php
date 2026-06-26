@@ -13,7 +13,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @forelse ($articles as $article)
-                <article class="bg-white rounded border border-[#E1E8F0] overflow-hidden transition-all duration-300 hover:border-transparent hover:shadow-ambient transform hover:-translate-y-1">
+                <article class="group cursor-pointer bg-white rounded border border-[#E1E8F0] overflow-hidden transition-all duration-300 hover:border-transparent hover:shadow-ambient transform hover:-translate-y-1" onclick="openArticleModal({{ json_encode(['judul' => $article->judul, 'isi' => $article->isi, 'gambar' => $article->gambar ? Storage::url($article->gambar) : null, 'tanggal' => optional($article->tanggal_publikasi)->format('M d, Y') ?? 'Artikel']) }})">
                     <div class="h-48 relative overflow-hidden bg-neutral">
                         @if ($article->gambar)
                             <img src="{{ Storage::url($article->gambar) }}" alt="{{ $article->judul }}" class="w-full h-full object-cover" />
@@ -25,13 +25,13 @@
                         </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="font-headline text-[24px] font-semibold text-ink-black mb-3 hover:text-primary cursor-pointer" onclick="openArticleModal({{ json_encode(['judul' => $article->judul, 'isi' => $article->isi, 'gambar' => $article->gambar ? Storage::url($article->gambar) : null, 'tanggal' => optional($article->tanggal_publikasi)->format('M d, Y') ?? 'Artikel']) }})">
+                        <h3 class="font-headline text-[24px] font-semibold text-ink-black mb-3 group-hover:text-primary transition-colors">
                             {{ $article->judul }}
                         </h3>
                         <p class="text-slate-gray text-[16px] mb-6 line-clamp-3 leading-[1.6]">
                             {{ \Illuminate\Support\Str::limit(strip_tags($article->isi), 120) }}
                         </p>
-                        <button onclick="openArticleModal({{ json_encode(['judul' => $article->judul, 'isi' => $article->isi, 'gambar' => $article->gambar ? Storage::url($article->gambar) : null, 'tanggal' => optional($article->tanggal_publikasi)->format('M d, Y') ?? 'Artikel']) }})" class="text-primary text-[14px] font-semibold hover:text-secondary flex items-center gap-1">Baca Selengkapnya &rarr;</button>
+                        <span class="text-primary text-[14px] font-semibold group-hover:text-secondary flex items-center gap-1 transition-colors">Baca Selengkapnya &rarr;</span>
                     </div>
                 </article>
                 @empty

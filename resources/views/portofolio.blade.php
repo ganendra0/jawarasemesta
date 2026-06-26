@@ -13,7 +13,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @forelse ($portfolios as $portfolio)
-                <div class="group cursor-pointer bg-white rounded border border-[#E1E8F0] hover:border-transparent hover:shadow-ambient transition-all duration-300 overflow-hidden transform hover:-translate-y-1">
+                <div class="group cursor-pointer bg-white rounded border border-[#E1E8F0] hover:border-transparent hover:shadow-ambient transition-all duration-300 overflow-hidden transform hover:-translate-y-1" onclick="openPortfolioModal({{ json_encode(['judul' => $portfolio->judul, 'deskripsi' => $portfolio->deskripsi, 'gambar' => $portfolio->gambar ? Storage::url($portfolio->gambar) : null, 'link_demo' => $portfolio->link_demo, 'link_github' => $portfolio->link_github, 'teknologi' => $portfolio->teknologi, 'clients' => $portfolio->clients->map(fn($c) => ['name' => $c->name, 'logo' => $c->logo ? Storage::url($c->logo) : null])]) }})">
                     <div class="overflow-hidden bg-deep-navy h-56 relative">
                         @if ($portfolio->gambar)
                             <img src="{{ Storage::url($portfolio->gambar) }}" alt="{{ $portfolio->judul }}" class="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500" />
@@ -43,9 +43,9 @@
                             <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-[12px] font-semibold mb-4">{{ explode(',', $portfolio->teknologi)[0] }}</span>
                         @endif
                         <h3 class="font-headline text-[24px] font-semibold text-ink-black mb-2">{{ $portfolio->judul }}</h3>
-                        <button onclick="openPortfolioModal({{ json_encode(['judul' => $portfolio->judul, 'deskripsi' => $portfolio->deskripsi, 'gambar' => $portfolio->gambar ? Storage::url($portfolio->gambar) : null, 'link_demo' => $portfolio->link_demo, 'link_github' => $portfolio->link_github, 'teknologi' => $portfolio->teknologi, 'clients' => $portfolio->clients->map(fn($c) => ['name' => $c->name, 'logo' => $c->logo ? Storage::url($c->logo) : null])]) }})" class="text-[14px] font-semibold text-slate-gray group-hover:text-primary flex items-center gap-1 mt-4 transition-colors">
+                        <span class="text-[14px] font-semibold text-slate-gray group-hover:text-primary flex items-center gap-1 mt-4 transition-colors">
                             Lihat detail <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
+                        </span>
                     </div>
                 </div>
                 @empty

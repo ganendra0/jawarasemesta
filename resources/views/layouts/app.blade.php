@@ -79,15 +79,50 @@
 
                 <!-- Mobile menu button -->
                 <div class="flex md:hidden items-center">
-                    <button class="text-slate-gray hover:text-primary focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-slate-gray hover:text-primary focus:outline-none">
+                        <svg id="menuIcon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="closeIcon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-3">
+                <a href="{{ url('/#home') }}" class="block text-slate-gray hover:text-primary font-medium transition-colors py-2">Home</a>
+                <a href="{{ url('/#about') }}" class="block text-slate-gray hover:text-primary font-medium transition-colors py-2">About</a>
+                <a href="{{ url('/#services') }}" class="block text-slate-gray hover:text-primary font-medium transition-colors py-2">Services</a>
+                <a href="{{ url('/#portfolio') }}" class="block text-slate-gray hover:text-primary font-medium transition-colors py-2">Portfolio</a>
+                <a href="{{ url('/#insights') }}" class="block text-slate-gray hover:text-primary font-medium transition-colors py-2">Insights</a>
+                <a href="{{ url('/produk') }}" class="block text-slate-gray hover:text-primary font-medium transition-colors py-2">Produk</a>
+                <a href="{{ url('/#contact') }}" class="block bg-primary hover:bg-secondary text-white text-center px-5 py-2.5 rounded font-medium transition-all mt-2">Hubungi Kami</a>
+            </div>
+        </div>
     </nav>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            menu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('menuIcon').classList.remove('hidden');
+                document.getElementById('closeIcon').classList.add('hidden');
+            });
+        });
+    </script>
 
     @yield('content')
 
