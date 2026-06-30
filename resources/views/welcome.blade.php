@@ -167,7 +167,7 @@
                 <span class="text-primary font-semibold text-sm tracking-wider uppercase mb-2 block">TENTANG KAMI</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 max-w-3xl mx-auto leading-tight">10+ Tahun Menghadirkan Inovasi Teknologi Berkelanjutan</h2>
                 <p class="text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                    PT Jawara Semesta adalah perusahaan penyedia solusi teknologi informasi yang berlokasi di Surabaya, Jawa Timur, dan telah berdiri pada 02 September 2014. Kami berfokus pada pengembangan dan implementasi teknologi digital yang membantu instansi bertransformasi, berinovasi, dan berkembang di tengah dinamika dunia bisnis yang terus berubah.
+                    CV Jawara Semesta adalah perusahaan penyedia solusi teknologi informasi yang berlokasi di Surabaya, Jawa Timur, dan telah berdiri pada 02 September 2015. Kami berfokus pada pengembangan dan implementasi teknologi digital yang membantu instansi bertransformasi, berinovasi, dan berkembang di tengah dinamika dunia bisnis yang terus berubah.
                 </p>
             </div>
             
